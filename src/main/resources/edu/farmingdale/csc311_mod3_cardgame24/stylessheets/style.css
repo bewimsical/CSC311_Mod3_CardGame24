@@ -1,0 +1,14 @@
+.root{
+    -fx-font-family: Georgia, Serif;
+    -fx-font-weight: bold;
+    -fx-background-color: #35654d;
+}
+
+.card{
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 4px;
+
+}
