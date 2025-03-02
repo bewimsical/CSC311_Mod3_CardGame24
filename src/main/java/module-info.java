@@ -1,6 +1,7 @@
 module edu.farmingdale.csc311_mod3_cardgame24 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens edu.farmingdale.csc311_mod3_cardgame24 to javafx.fxml;

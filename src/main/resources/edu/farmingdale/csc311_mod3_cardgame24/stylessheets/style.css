@@ -1,6 +1,10 @@
+@font-face {
+    font-family: 'Arvo';
+    src: url('../fonts/Arvo-Regular.ttf');
+}
+
 .root{
-    -fx-font-family: Georgia, Serif;
-    -fx-font-weight: bold;
+    -fx-font-family: Arvo, Serif;
     -fx-background-color: #35654d;
 }
 
@@ -10,5 +14,23 @@
     -fx-border-width: 2px;
     -fx-border-radius: 3px;
     -fx-background-radius: 4px;
-
+}
+.label{
+    -fx-text-fill: white;
+}
+.error{
+    -fx-border-color: red;
+    -fx-border-radius: 3px;
+    -fx-border-width: 2px;
+}
+.solved{
+    -fx-border-color: lightgreen;
+    -fx-border-radius: 3px;
+    -fx-border-width: 2px;
+}
+#label{
+    -fx-font-size: 15px;
+}
+.button{
+    -fx-font-size: 14px;
 }
