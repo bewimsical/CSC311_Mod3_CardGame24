@@ -1,11 +1,14 @@
 package edu.farmingdale.csc311_mod3_cardgame24;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Random;
@@ -126,10 +129,16 @@ public class HelloController implements Initializable {
         for (int i = 0; i < 4; i++) {
             solveCards[i] = (double)cards[i];
         }
-        String[] solutions = {"SEND HELP!", "uhhh...", "idk", "loading...", "24"};
-        Random rnd = new Random();
-        int index = rnd.nextInt(solutions.length);
-        solution.setText(solutions[index]);
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode response = mapper.readTree(Utils.sendGET());
+            solution.setText(response.get("data").asText());
+
+        } catch (IOException e) {
+            System.out.println("no data");;
+        }
+
+
     }
 
 
