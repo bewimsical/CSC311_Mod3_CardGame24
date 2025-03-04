@@ -1,17 +1,15 @@
 package edu.farmingdale.csc311_mod3_cardgame24;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
+import javax.script.ScriptException;
 import java.net.URL;
 import java.util.List;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -41,6 +39,9 @@ public class HelloController implements Initializable {
     private int cardValue2;
     private int cardValue3;
     private int cardValue4;
+    private String solverScript;
+    private int hintCount = 0;
+    private String numSolutions = "0";
 
 
     @Override
@@ -48,6 +49,7 @@ public class HelloController implements Initializable {
         deck = new Deck();
         cardViews = new ImageView[]{cardView1, cardView2, cardView3, cardView4};
         dealCards();
+        solverScript = Utils.getScript();
     }
     @FXML
     public void dealCards(){
@@ -59,15 +61,15 @@ public class HelloController implements Initializable {
                 cards[i] = c.getValue();
             }
         }else deck = new Deck();
-        solution.clear();
-        solution.setPromptText("");
         expression.clear();
         expression.setPromptText("");
         expression.getStyleClass().removeAll("error", "solved");
+        hintCount = 0;
+        numSolutions = "0";
     }
 
     @FXML
-    void evaluateExpression(ActionEvent event) {
+    void evaluateExpression(MouseEvent event) {
         String expressionIn = expression.getText();
         if(!isExpression(expressionIn)) {
             handleError("Invalid expression");
@@ -92,7 +94,7 @@ public class HelloController implements Initializable {
         if (val == 24 && count == 4){
             expression.getStyleClass().remove("error");
             expression.getStyleClass().add("solved");
-            expression.setText(expression.getText() + "= 24");
+            expression.setText(expression.getText() + " = 24");
         } else{
 
             if (val != 24) {
@@ -125,22 +127,23 @@ public class HelloController implements Initializable {
     }
     @FXML
     void findSolution(ActionEvent event) {
-        double[] solveCards = new double[4];
-        for (int i = 0; i < 4; i++) {
-            solveCards[i] = (double)cards[i];
+        //Get number of solutions
+        String randomSolution = "";
+        if (hintCount == 0 ){
+            try {
+                numSolutions = Utils.getSolutionsCount(cards, solverScript);
+                hintCount++;
+                System.out.println(numSolutions);
+            } catch (ScriptException e) {
+                System.out.println("ERROR BAD SCRIPT");
+            }
+        } else if (hintCount == 1 && Integer.parseInt(numSolutions) > 0) {
+            try {
+                randomSolution = Utils.getRandomSolution(cards, solverScript);
+                System.out.println(randomSolution);
+            } catch (ScriptException e) {
+                System.out.println("ERROR BAD SCRIPT");;
+            }
         }
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode response = mapper.readTree(Utils.sendGET());
-            solution.setText(response.get("data").asText());
-
-        } catch (IOException e) {
-            System.out.println("no data");;
-        }
-
-
     }
-
-
-
 }
