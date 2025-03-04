@@ -115,6 +115,7 @@ public class HelloController implements Initializable {
         return false;
     }
     void handleError(String message){
+        expression.getStyleClass().removeAll("error", "solved");
         expression.getStyleClass().add("error");
         expression.clear();
         expression.setPromptText(message);
