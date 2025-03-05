@@ -3,6 +3,7 @@ package edu.farmingdale.csc311_mod3_cardgame24;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +28,9 @@ public class HelloController implements Initializable {
 
     @FXML
     private TextField expression;
+
+    @FXML
+    private Label expressionLabel;
 
     @FXML
     private TextField solution;
@@ -69,7 +73,8 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    void evaluateExpression(MouseEvent event) {
+    void evaluateExpression() {
+        expressionLabel.requestFocus();
         String expressionIn = expression.getText();
         if(!isExpression(expressionIn)) {
             handleError("Invalid expression");
@@ -126,7 +131,7 @@ public class HelloController implements Initializable {
         expression.setPromptText(message);
     }
     @FXML
-    void findSolution(ActionEvent event) {
+    void findSolution() {
         //Get number of solutions
         String randomSolution = "";
         if (hintCount == 0 ){
