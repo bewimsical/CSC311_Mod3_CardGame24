@@ -86,7 +86,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                edu.farmingdale.csc311_mod3_cardgame24/edu.farmingdale.csc311_mod3_cardgame24.HelloApplication
+                                edu.farmingdale.csc311_mod3_cardgame24/edu.farmingdale.csc311_mod3_cardgame24.GameApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
