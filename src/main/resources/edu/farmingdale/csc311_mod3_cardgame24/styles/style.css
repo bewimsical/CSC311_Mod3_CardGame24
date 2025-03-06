@@ -42,10 +42,6 @@
     -fx-font-size: 35px;
     -fx-font-family: Rye;
 }
-.rules-title{
+.hint{
     -fx-font-size: 25px;
-}
-.text-area{
-    -fx-text-fill: white;
-    -fx-background-color: #35654d;
 }

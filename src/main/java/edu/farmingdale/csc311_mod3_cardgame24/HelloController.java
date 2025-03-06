@@ -175,6 +175,7 @@ public class HelloController implements Initializable {
         Stage primaryStage = (Stage) expression.getParent().getScene().getWindow();
         String hint1 = "There are "+numSolutions+" solutions";
         String hint2 = randomSolution.replaceAll("[\\d]", "_");
+        hint2 = hint2.replaceAll("(__)", "_");
         System.out.println(hint2);
         //popup
         Stage popUp = new Stage();
