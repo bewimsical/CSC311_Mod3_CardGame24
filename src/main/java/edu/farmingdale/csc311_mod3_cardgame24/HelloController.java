@@ -31,7 +31,7 @@ public class HelloController implements Initializable {
 
     @FXML private Label expressionLabel;
 
-    @FXML private TextField solution;
+    @FXML private ImageView dealButton;
 
     private ImageView[] cardViews;
 
@@ -52,37 +52,48 @@ public class HelloController implements Initializable {
         cardViews = new ImageView[]{cardView1, cardView2, cardView3, cardView4};
         solverScript = Utils.getScript();
         dealCards();
+        runScripts();
     }
     @FXML
     public void dealCards(){
-        cards = new int[4];
-        if(deck.getDeck().size() >= 4) {
-            for (int i = 0; i < 4; i++) {
-                Card c = deck.deal();
-                cardViews[i].setImage(c.getImage());
-                cards[i] = c.getValue();
-            }
-        }else deck = new Deck();
+        if(!dealButton.getStyleClass().contains("disabled")) {
+            cards = new int[4];
+            if (deck.getDeck().size() >= 4) {
+                for (int i = 0; i < 4; i++) {
+                    Card c = deck.deal();
+                    cardViews[i].setImage(c.getImage());
+                    cards[i] = c.getValue();
+                }
+            } else deck = new Deck();
 
-        expression.clear();
-        expression.setPromptText("");
-        expression.getStyleClass().removeAll("error", "solved");
-        hintCount = 0;
-        numSolutions = "0";
-        try {
-            numSolutions = Utils.getSolutionsCount(cards, solverScript);
-            System.out.println(numSolutions);
-        } catch (ScriptException e) {
-            System.out.println("ERROR BAD SCRIPT");
+            expression.clear();
+            expression.setPromptText("");
+            expression.getStyleClass().removeAll("error", "solved");
+            dealButton.getStyleClass().add("disabled");
+            hintCount = 0;
+            numSolutions = "0";
         }
-        if (Integer.parseInt(numSolutions) > 0) {
+    }
+
+    @FXML
+    public void runScripts(){
+        if(dealButton.getStyleClass().contains("disabled")) {
             try {
-                randomSolution = Utils.getRandomSolution(cards, solverScript);
-                System.out.println(randomSolution);
+                numSolutions = Utils.getSolutionsCount(cards, solverScript);
+                System.out.println(numSolutions);
             } catch (ScriptException e) {
-                System.out.println("ERROR BAD SCRIPT");;
+                System.out.println("ERROR BAD SCRIPT");
+            }
+            if (Integer.parseInt(numSolutions) > 0) {
+                try {
+                    randomSolution = Utils.getRandomSolution(cards, solverScript);
+                    System.out.println(randomSolution);
+                } catch (ScriptException e) {
+                    System.out.println("ERROR BAD SCRIPT");
+                }
             }
         }
+        dealButton.getStyleClass().remove("disabled");
     }
 
     @FXML

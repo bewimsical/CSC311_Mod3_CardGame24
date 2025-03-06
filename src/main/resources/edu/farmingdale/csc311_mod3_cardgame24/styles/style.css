@@ -45,3 +45,8 @@
 .hint{
     -fx-font-size: 25px;
 }
+
+.disabled{
+    -fx-opacity: 0.7;
+    -fx-cursor: wait;
+}
