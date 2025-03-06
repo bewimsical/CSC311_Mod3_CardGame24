@@ -2,6 +2,10 @@
     font-family: 'Arvo';
     src: url('../fonts/Arvo-Regular.ttf');
 }
+@font-face {
+    font-family: 'Rye';
+    src: url('../fonts/Rye-Regular.ttf');
+}
 
 .root{
     -fx-font-family: Arvo, Serif;
@@ -33,4 +37,11 @@
 }
 .button{
     -fx-font-size: 14px;
+}
+.title{
+    -fx-font-size: 35px;
+    -fx-font-family: Rye;
+}
+.hint{
+    -fx-font-size: 25px;
 }
