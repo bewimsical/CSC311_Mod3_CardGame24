@@ -69,20 +69,8 @@ public class HelloController implements Initializable {
         expression.getStyleClass().removeAll("error", "solved");
         hintCount = 0;
         numSolutions = "0";
-        try {
-            numSolutions = Utils.getSolutionsCount(cards, solverScript);
-            System.out.println(numSolutions);
-        } catch (ScriptException e) {
-            System.out.println("ERROR BAD SCRIPT");
-        }
-        if (Integer.parseInt(numSolutions) > 0) {
-            try {
-                randomSolution = Utils.getRandomSolution(cards, solverScript);
-                System.out.println(randomSolution);
-            } catch (ScriptException e) {
-                System.out.println("ERROR BAD SCRIPT");;
-            }
-        }
+        solutionCount = 0;
+
     }
 
     @FXML
@@ -147,11 +135,15 @@ public class HelloController implements Initializable {
     void findSolution() {
         //Get number of solutions
         expression.getStyleClass().removeAll("error", "solved");
-        if (solutionCount == 0 && Integer.parseInt(numSolutions) > 0){
-            expression.setText(randomSolution);
-            solutionCount++;
-            return;
-        }else if (Integer.parseInt(numSolutions) > 0){
+        if(solutionCount == 0){
+            try {
+                numSolutions = Utils.getSolutionsCount(cards, solverScript);
+                System.out.println(numSolutions);
+            } catch (ScriptException e) {
+                System.out.println("ERROR BAD SCRIPT");
+            }
+        }
+        if(Integer.parseInt(numSolutions) > 0){
             try {
                 randomSolution = Utils.getRandomSolution(cards, solverScript, solutionCount%Integer.parseInt(numSolutions));
                 System.out.println(randomSolution);
@@ -172,6 +164,20 @@ public class HelloController implements Initializable {
     }
     @FXML
     void getHint(MouseEvent event) throws IOException {
+        try {
+            numSolutions = Utils.getSolutionsCount(cards, solverScript);
+            System.out.println(numSolutions);
+        } catch (ScriptException e) {
+            System.out.println("ERROR BAD SCRIPT");
+        }
+        if (Integer.parseInt(numSolutions) > 0) {
+            try {
+                randomSolution = Utils.getRandomSolution(cards, solverScript);
+                System.out.println(randomSolution);
+            } catch (ScriptException e) {
+                System.out.println("ERROR BAD SCRIPT");;
+            }
+        }
         Stage primaryStage = (Stage) expression.getParent().getScene().getWindow();
         String hint1 = "There are "+numSolutions+" solutions";
         String hint2 = randomSolution.replaceAll("[\\d]", "_");
