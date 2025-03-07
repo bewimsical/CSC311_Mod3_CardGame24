@@ -6,6 +6,7 @@ The 24 Game App is a simple and interactive game where players are given four nu
 
 ## Demo
 
+![card24](https://github.com/user-attachments/assets/909ce127-ce7a-4a02-b124-7038a15de737)
 
 
 ## Features
@@ -16,25 +17,7 @@ The 24 Game App is a simple and interactive game where players are given four nu
 - Validates user solutions and provides feedback.
 - Option to generate a new set of numbers if no solution is found.
 - Hint feature to assist players in finding a possible approach.
-- Solve feature that provides a correct solution when needed.
-
-## Installation
-
-To run the app locally:
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/24-game-app.git
-   cd 24-game-app
-   ```
-2. Install dependencies:
-   ```sh
-   mvn install
-   ```
-3. Start the application:
-   ```sh
-   mvn javafx:run
-   ```
+- Solve feature that provides a correct solution when needed. ([solver script source](https://github.com/frank-deng/24game-solver))
 
 ## How to Play
 
@@ -50,21 +33,5 @@ To run the app locally:
 - JavaFX (for GUI)
 - Maven (for dependency management)
 
-## Contribution
 
-Contributions are welcome! To contribute:
-
-1. Fork the repository.
-2. Create a new branch (`feature/your-feature-name`).
-3. Commit your changes.
-4. Push to your branch and create a pull request.
-
-## License
-
-This project is licensed under the MIT License. See `LICENSE` for details.
-
-
-## Contact
-
-For questions or feedback, feel free to reach out via GitHub issues or email at [your.email@example.com](mailto\:your.email@example.com).
 
